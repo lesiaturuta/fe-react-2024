@@ -1,4 +1,95 @@
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  background: #111;
+  min-height: 80px;
   font-size: 34px;
   text-align: center;
+  flex-wrap: wrap;
+}
+
+.verticalLine::before {
+  content: "";
+  display: block;
+  margin: 0 10px;
+  width: 1px;
+  height: 20px;
+  background-color: #656565;
+}
+
+.nav {
+  flex-grow: 1;
+  margin-right: 124px;
+}
+
+.cart {
+  margin-right: 32px;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+}
+
+.nav__items {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav__item {
+  display: flex;
+  align-items: center;
+}
+
+.nav__link {
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.nav__link:hover {
+  color: #FF0;
+}
+
+.nav__link__active {
+  font-weight: 700;
+}
+
+.themes {
+  display: flex;
+  align-items: center;
+}
+
+.mr_10 {
+  margin-right: 10px;
+}
+
+.mr_49 {
+  margin-right: 49px;
+}
+
+@media screen and (max-width: 880px) {
+
+  .header {
+    padding-top: 15px;
+  }
+
+  .nav {
+    flex-grow: 1;
+    margin: 10px auto 0;
+    /*margin-right: 0;*/
+  }
+
+  .nav__items {
+    justify-content: center;
+  }
+
+  .buttons {
+    justify-content: center;
+    width: 100%;
+    margin: 20px 0 15px;
+  }
 }

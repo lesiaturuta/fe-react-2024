@@ -4,7 +4,7 @@
   flex-direction: row;
   justify-content: space-between;
   height: 100%;
-  min-height: 100vh;
+  flex: 1;
 }
 
 .container {
@@ -55,7 +55,7 @@
   padding-top: 60px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 880px) {
 
   .main {
     min-height: 100%;
@@ -74,7 +74,13 @@
 
   .about__title {
     margin-top: 30px;
-    font-size: 50px;
+    font-size: 27px;
+  }
+
+  .about__text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
   }
 
   .image {
