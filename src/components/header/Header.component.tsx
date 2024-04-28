@@ -1,6 +1,7 @@
 import cart from '@/assets/icons/cart.svg';
 import logOut from '@/assets/icons/log_Out.svg';
 import logo from '@/assets/icons/logo.svg';
+import burger from '@/assets/icons/menu_Duo_LG.svg';
 import moon from '@/assets/icons/moon.svg';
 import sun from '@/assets/icons/sun.svg';
 import userAddIcon from '@/assets/icons/user_Add.svg';
@@ -34,6 +35,10 @@ const Header = () => (
             <img className={styles.cart} src={cart} alt="cart" />
             <Button className={styles.mr_10} name="Login" backgroundColor="#333" icon={logOut} />
             <Button name="Sign up" backgroundColor="#EF4934" icon={userAddIcon} />
+        </div>
+        <div className={styles.cart_and_burger}>
+            <img className={styles.cart} src={cart} alt="cart" />
+            <img className={styles.burger} src={burger} alt="burger" />
         </div>
     </header>
 );

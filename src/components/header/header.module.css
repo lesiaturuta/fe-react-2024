@@ -71,25 +71,25 @@
   margin-right: 49px;
 }
 
+.cart_and_burger {
+  display: none;
+}
+
 @media screen and (max-width: 880px) {
 
-  .header {
-    padding-top: 15px;
-  }
-
-  .nav {
-    flex-grow: 1;
-    margin: 10px auto 0;
-    /*margin-right: 0;*/
+  .nav, .buttons, .themes {
+    display: none;
   }
 
   .nav__items {
     justify-content: center;
   }
 
-  .buttons {
-    justify-content: center;
-    width: 100%;
-    margin: 20px 0 15px;
+  .cart_and_burger {
+    display: flex;
+  }
+
+  .cart {
+    margin-right: 14px;
   }
 }
