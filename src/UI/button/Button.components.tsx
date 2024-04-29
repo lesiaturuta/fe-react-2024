@@ -1,12 +1,6 @@
-import styles from './button.module.css';
+import type ButtonInterface from '@/interface/button.ts';
 
-interface ButtonInterface {
-    name?: string;
-    backgroundColor?: string;
-    textColor?: string;
-    icon?: string;
-    className?: string;
-}
+import styles from './button.module.css';
 
 const Button = ({ name = '', backgroundColor = '#111', textColor = '#FFF', icon, className }: ButtonInterface) => (
     <button className={`${styles.button} ${className}`} type="reset" style={{ background: backgroundColor, color: textColor }}>

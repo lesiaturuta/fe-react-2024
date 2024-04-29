@@ -1,18 +1,9 @@
 import React from 'react';
 
 import FooterIcon from '@/components/footerIcon/FooterIcon.component.tsx';
+import type { IconLinkProps } from '@/interface/icon.ts';
 
 import styles from './footerIcons.module.css';
-
-interface IconLinkProps {
-    media: Media[];
-    className?: string;
-}
-
-interface Media {
-    icon: string;
-    url: string;
-}
 
 const FooterIcons = ({ media, className }: IconLinkProps) => (
     <div className={className}>

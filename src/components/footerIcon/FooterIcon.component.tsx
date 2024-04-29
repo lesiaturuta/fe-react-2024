@@ -1,11 +1,6 @@
 import React from 'react';
 
-interface Icon {
-    icon: string;
-    key: number;
-    url: string;
-    className?: string;
-}
+import type { Icon } from '@/interface/icon.ts';
 
 const FooterIcon = ({ icon, url, key, className }: Icon) => (
     <a key={key} href={url} target="_blank" rel="noopener noreferrer" className={className}>
