@@ -12,7 +12,7 @@
   width: 100%;
   min-height: 100%;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 0 0 30px;
 }
 
 .about {
@@ -65,6 +65,7 @@
     flex-direction: column-reverse;
     align-items: center;
     min-height: 100%;
+    padding: 0 30px;
   }
 
   .about {
