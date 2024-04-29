@@ -40,17 +40,23 @@
 
 @media screen and (max-width: 880px) {
 
-  .social_items {
-    margin-top: 20px;
+  .footer {
+    min-height: 166px;
+    margin-bottom: 0;
   }
 
-  .footer {
-    margin-bottom: 15px;
+  .social_items {
+    margin-top: 0;
   }
 
   .description {
+    margin-top: 30px;
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
+  }
+
+  .horizontalLine {
+    margin: 0;
   }
 }
