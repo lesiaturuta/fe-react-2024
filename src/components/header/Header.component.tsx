@@ -31,24 +31,20 @@ const Header = ({ amountCart, nav }: { amountCart: number; nav: (products: strin
             <nav className={styles.nav}>
                 <ul className={styles.nav__items}>
                     <li className={`${styles.nav__item} ${styles.mr_49}`}>
-                        <a
+                        <input
+                            type="button"
                             className={`${styles.nav__link} ${activeNavItem === 'About' && styles.nav__link__active}`}
-                            href="#"
+                            value="About"
                             onClick={() => handleNavClick('About')}
-                            role="button"
-                        >
-                            About
-                        </a>
+                        />
                     </li>
                     <li className={styles.nav__item}>
-                        <a
+                        <input
+                            type="button"
                             className={`${styles.nav__link} ${activeNavItem === 'Products' && styles.nav__link__active}`}
-                            href="#"
+                            value="Products"
                             onClick={() => handleNavClick('Products')}
-                            role="button"
-                        >
-                            Products
-                        </a>
+                        />
                     </li>
                 </ul>
             </nav>
