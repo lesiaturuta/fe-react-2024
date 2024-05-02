@@ -35,6 +35,7 @@ const Header = ({ amountCart, nav }: { amountCart: number; nav: (products: strin
                             className={`${styles.nav__link} ${activeNavItem === 'About' && styles.nav__link__active}`}
                             href="#"
                             onClick={() => handleNavClick('About')}
+                            role="button"
                         >
                             About
                         </a>
@@ -44,6 +45,7 @@ const Header = ({ amountCart, nav }: { amountCart: number; nav: (products: strin
                             className={`${styles.nav__link} ${activeNavItem === 'Products' && styles.nav__link__active}`}
                             href="#"
                             onClick={() => handleNavClick('Products')}
+                            role="button"
                         >
                             Products
                         </a>
