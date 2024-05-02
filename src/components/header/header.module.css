@@ -75,6 +75,25 @@
   display: none;
 }
 
+.cart {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cart_button {
+  width: 100%;
+  height: 100%;
+}
+
+.save_cart {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 12px;
+  text-align: center;
+}
+
 @media screen and (max-width: 880px) {
 
   .nav, .buttons, .themes {
