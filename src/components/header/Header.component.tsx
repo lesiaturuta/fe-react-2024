@@ -51,7 +51,7 @@ const Header = ({ amountCart, nav }: { amountCart: number; nav: (products: strin
             <div className={styles.buttons}>
                 <div className={styles.cart}>
                     <img className={styles.cart_button} src={cart} alt="cart" />
-                    {amountCart && (
+                    {amountCart > 0 && (
                         <div className={styles1.select_cart}>
                             <span className={styles.save_cart}>{amountCart}</span>
                         </div>
@@ -63,7 +63,7 @@ const Header = ({ amountCart, nav }: { amountCart: number; nav: (products: strin
             <div className={styles.cart_and_burger}>
                 <div className={styles.cart}>
                     <img className={styles.cart_button} src={cart} alt="cart" />
-                    {amountCart && (
+                    {amountCart > 0 && (
                         <div className={styles1.select_cart}>
                             <span className={styles.save_cart}>{amountCart}</span>
                         </div>
