@@ -50,12 +50,7 @@ const Header = ({ amountCart, nav }: { amountCart: number; nav: (products: strin
             </nav>
             <div className={styles.buttons}>
                 <div className={styles.cart}>
-                    <div
-                        className={styles.cart_button}
-                        style={{
-                            backgroundImage: `url(${cart})`,
-                        }}
-                    ></div>
+                    <img className={styles.cart_button} src={cart} alt="cart" />
                     {amountCart && (
                         <div className={styles1.select_cart}>
                             <span className={styles.save_cart}>{amountCart}</span>
@@ -67,12 +62,7 @@ const Header = ({ amountCart, nav }: { amountCart: number; nav: (products: strin
             </div>
             <div className={styles.cart_and_burger}>
                 <div className={styles.cart}>
-                    <div
-                        className={styles.cart_button}
-                        style={{
-                            backgroundImage: `url(${cart})`,
-                        }}
-                    ></div>
+                    <img className={styles.cart_button} src={cart} alt="cart" />
                     {amountCart && (
                         <div className={styles1.select_cart}>
                             <span className={styles.save_cart}>{amountCart}</span>

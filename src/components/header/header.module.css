@@ -50,10 +50,14 @@
   line-height: 20px;
   background: none;
   border: none;
+  transition: .2s;
+  cursor: pointer;
 }
 
 .nav__link:hover {
-  color: #FF0;
+  text-decoration: underline;
+  font-weight: 700;
+  transform: scale(1.1);
 }
 
 .nav__link__active {

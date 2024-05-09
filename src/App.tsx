@@ -17,17 +17,21 @@ const App = () => {
     useEffect(() => {
         getData('https://ma-backend-api.mocintra.com/api/v1/products')
             .then((data) => {
-                let count: number = 0;
                 setProducts(data);
-                data.forEach((product: Product) => {
-                    if (localStorage.getItem(product.id.toString()) === 'true') {
-                        count++;
-                    }
-                });
-                setAmountCart(count);
+                updateLocalCart(data);
             })
             .catch((error) => console.error(error));
     }, []);
+
+    const updateLocalCart = (data: Product[]) => {
+        let count: number = 0;
+        data.forEach((product: Product) => {
+            if (localStorage.getItem(product.id.toString()) === 'true') {
+                count++;
+            }
+        });
+        setAmountCart(count);
+    };
 
     const increaseCounter = () => {
         setAmountCart(amountCart + 1);
@@ -37,25 +41,12 @@ const App = () => {
         setAmountCart(amountCart - 1);
     };
 
-    const nav = (link: String) => {
-        switch (link) {
-            case 'About': {
-                setIsProduct(false);
-                break;
-            }
-            case 'Products': {
-                setIsProduct(true);
-                break;
-            }
-            default: {
-                break;
-            }
-        }
-    };
-
     return (
         <div className="body">
-            <HeaderComponent amountCart={amountCart} nav={nav} />
+            <HeaderComponent
+                amountCart={amountCart}
+                nav={(link: String) => (link === 'About' ? setIsProduct(false) : setIsProduct(true))}
+            />
             {!isProduct && <AboutComponent />}
             {isProduct && <ProductList products={products} increaseCounter={increaseCounter} decrementCounter={decrementCounter} />}
             <FooterComponent />

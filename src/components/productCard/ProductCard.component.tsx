@@ -23,14 +23,11 @@ const ProductCard = ({
             setIsCart(isProductInCart);
         }
     }, [product.id]);
+
     const changeCart = () => {
         setIsCart(!isCart);
         localStorage.setItem(product.id.toString(), JSON.stringify(!isCart));
-        if (!isCart) {
-            increaseCounter();
-        } else if (isCart) {
-            decrementCounter();
-        }
+        isCart ? decrementCounter() : increaseCounter();
     };
 
     return (
@@ -47,12 +44,7 @@ const ProductCard = ({
                     </div>
 
                     <div className={styles.cart} onClick={changeCart}>
-                        <div
-                            className={styles.cart_button}
-                            style={{
-                                backgroundImage: `url(${cart})`,
-                            }}
-                        ></div>
+                        <img className={styles.cart_button} src={cart} alt="cart" />
                         {isCart && (
                             <div className={styles.select_cart}>
                                 <span className={styles.save_cart}>1</span>
