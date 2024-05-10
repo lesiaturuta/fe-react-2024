@@ -12,11 +12,11 @@ import Button from '@/UI/button/Button.components.tsx';
 import styles1 from '../productCard/productCard.module.css';
 import styles from './header.module.css';
 
-const Header = ({ amountCart, nav }: { amountCart: number; nav: (products: string) => void }) => {
+const Header = ({ amountCart, toggleCurrentPage }: { amountCart: number; toggleCurrentPage: (products: string) => void }) => {
     const [activeNavItem, setActiveNavItem] = useState<string>('About');
 
     const handleNavClick = (navItem: string) => {
-        nav(navItem);
+        toggleCurrentPage(navItem);
         setActiveNavItem(navItem);
     };
 
@@ -31,20 +31,21 @@ const Header = ({ amountCart, nav }: { amountCart: number; nav: (products: strin
             <nav className={styles.nav}>
                 <ul className={styles.nav__items}>
                     <li className={`${styles.nav__item} ${styles.mr_49}`}>
-                        <input
-                            type="button"
+                        <button
                             className={`${styles.nav__link} ${activeNavItem === 'About' && styles.nav__link__active}`}
-                            value="About"
                             onClick={() => handleNavClick('About')}
-                        />
+                        >
+                            About
+                        </button>
                     </li>
                     <li className={styles.nav__item}>
-                        <input
+                        <button
                             type="button"
                             className={`${styles.nav__link} ${activeNavItem === 'Products' && styles.nav__link__active}`}
-                            value="Products"
                             onClick={() => handleNavClick('Products')}
-                        />
+                        >
+                            Products
+                        </button>
                     </li>
                 </ul>
             </nav>

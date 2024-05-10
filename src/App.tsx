@@ -41,12 +41,11 @@ const App = () => {
         setAmountCart(amountCart - 1);
     };
 
+    const toggleCurrentPage = (link: String) => (link === 'About' ? setIsProduct(false) : setIsProduct(true));
+
     return (
         <div className="body">
-            <HeaderComponent
-                amountCart={amountCart}
-                nav={(link: String) => (link === 'About' ? setIsProduct(false) : setIsProduct(true))}
-            />
+            <HeaderComponent amountCart={amountCart} toggleCurrentPage={toggleCurrentPage} />
             {!isProduct && <AboutComponent />}
             {isProduct && <ProductList products={products} increaseCounter={increaseCounter} decrementCounter={decrementCounter} />}
             <FooterComponent />
