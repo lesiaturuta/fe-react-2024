@@ -48,10 +48,16 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
+  background: none;
+  border: none;
+  transition: .2s;
+  cursor: pointer;
 }
 
 .nav__link:hover {
-  color: #FF0;
+  text-decoration: underline;
+  font-weight: 700;
+  transform: scale(1.1);
 }
 
 .nav__link__active {
@@ -73,6 +79,25 @@
 
 .cart_and_burger {
   display: none;
+}
+
+.cart {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cart_button {
+  width: 100%;
+  height: 100%;
+}
+
+.save_cart {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 12px;
+  text-align: center;
 }
 
 @media screen and (max-width: 880px) {
