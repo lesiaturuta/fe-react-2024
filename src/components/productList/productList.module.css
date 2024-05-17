@@ -1,3 +1,13 @@
+.light_theme {
+  --bg-primary: var(--bg-primary-light);
+  --color-pimary: var(--color-primary-light)
+}
+
+.dark_theme {
+  --bg-primary: var(--bg-primary-dark);
+  --color-pimary: var(--color-primary-dark)
+}
+
 .products {
   display: grid;
   flex: 1;
@@ -5,6 +15,7 @@
   row-gap: 15px;
   column-gap: 25px;
   padding: 15px 30px;
+  background: var(--bg-primary);
 }
 
 @media screen and (max-width: 1500px) {

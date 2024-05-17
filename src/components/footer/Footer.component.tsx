@@ -12,8 +12,8 @@ const socialMedia = [
     { icon: linkedin, url: URL_LINK_IN },
 ];
 
-const Footer = () => (
-    <footer className={styles.footer}>
+const Footer = ({ theme }: { theme: string }) => (
+    <footer className={`${styles.footer} ${theme === 'light' ? styles.light_theme : styles.dark_theme}`}>
         <div className={styles.horizontalLine}></div>
         <div className={styles.content}>
             <FooterIcons className={styles.social_items} media={socialMedia} />

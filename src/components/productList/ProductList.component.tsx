@@ -7,14 +7,22 @@ const ProductList = ({
     products,
     increaseCounter,
     decrementCounter,
+    theme,
 }: {
     products: Product[];
     increaseCounter: () => void;
     decrementCounter: () => void;
+    theme: string;
 }) => (
-    <ul className={styles.products}>
+    <ul className={`${styles.products} ${theme === 'light' ? styles.light_theme : styles.dark_theme}`}>
         {products.map((product: Product) => (
-            <ProductCard product={product} increaseCounter={increaseCounter} decrementCounter={decrementCounter} key={product.id} />
+            <ProductCard
+                theme={theme}
+                product={product}
+                increaseCounter={increaseCounter}
+                decrementCounter={decrementCounter}
+                key={product.id}
+            />
         ))}
     </ul>
 );

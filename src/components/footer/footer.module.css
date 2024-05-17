@@ -1,9 +1,21 @@
+.light_theme {
+  --bg-primary: var(--bg-primary-light);
+  --color-pimary: var(--color-primary-light)
+}
+
+.dark_theme {
+  --bg-primary: var(--bg-primary-dark);
+  --color-pimary: var(--color-primary-dark)
+}
+
 .footer {
   display: flex;
   flex-direction: column;
   padding: 0 30px;
   min-height: 160px;
   justify-content: space-between;
+  background: var(--bg-primary) ;
+  color: var(--color-pimary);
 }
 
 .horizontalLine {

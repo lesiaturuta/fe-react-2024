@@ -1,18 +1,27 @@
 import { useState } from 'react';
 
-import cart from '@/assets/icons/cart.svg';
+import IconCart from '@/assets/icons/IconCart.component.tsx';
 import logOut from '@/assets/icons/log_Out.svg';
 import logo from '@/assets/icons/logo.svg';
 import burger from '@/assets/icons/menu_Duo_LG.svg';
-import moon from '@/assets/icons/moon.svg';
-import sun from '@/assets/icons/sun.svg';
 import userAddIcon from '@/assets/icons/user_Add.svg';
+import ThemesComponent from '@/components/themes/Themes.component.tsx';
 import Button from '@/UI/button/Button.components.tsx';
 
 import styles1 from '../productCard/productCard.module.css';
 import styles from './header.module.css';
 
-const Header = ({ amountCart, toggleCurrentPage }: { amountCart: number; toggleCurrentPage: (products: string) => void }) => {
+const Header = ({
+    amountCart,
+    toggleCurrentPage,
+    theme,
+    changeTheme,
+}: {
+    amountCart: number;
+    toggleCurrentPage: (products: string) => void;
+    theme: string;
+    changeTheme: (name: string) => void;
+}) => {
     const [activeNavItem, setActiveNavItem] = useState<string>('About');
 
     const handleNavClick = (navItem: string) => {
@@ -23,11 +32,7 @@ const Header = ({ amountCart, toggleCurrentPage }: { amountCart: number; toggleC
     return (
         <header className={styles.header}>
             <img className={styles.mr_49} src={logo} alt="logo" />
-            <div className={styles.themes}>
-                <img src={sun} alt="sun" />
-                <div className={styles.verticalLine}></div>
-                <img src={moon} alt="moon" />
-            </div>
+            <ThemesComponent theme={theme} changeTheme={changeTheme} />
             <nav className={styles.nav}>
                 <ul className={styles.nav__items}>
                     <li className={`${styles.nav__item} ${styles.mr_49}`}>
@@ -51,7 +56,7 @@ const Header = ({ amountCart, toggleCurrentPage }: { amountCart: number; toggleC
             </nav>
             <div className={styles.buttons}>
                 <div className={styles.cart}>
-                    <img className={styles.cart_button} src={cart} alt="cart" />
+                    <IconCart color={'#FFF'} />
                     {amountCart > 0 && (
                         <div className={styles1.select_cart}>
                             <span className={styles.save_cart}>{amountCart}</span>
@@ -63,7 +68,7 @@ const Header = ({ amountCart, toggleCurrentPage }: { amountCart: number; toggleC
             </div>
             <div className={styles.cart_and_burger}>
                 <div className={styles.cart}>
-                    <img className={styles.cart_button} src={cart} alt="cart" />
+                    <IconCart color={'#FFF'} />
                     {amountCart > 0 && (
                         <div className={styles1.select_cart}>
                             <span className={styles.save_cart}>{amountCart}</span>

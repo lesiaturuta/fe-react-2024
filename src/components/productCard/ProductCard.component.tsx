@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import cart from '@/assets/icons/cart.svg';
+import IconCart from '@/assets/icons/IconCart.component.tsx';
 import type Product from '@/interface/product.ts';
 
 import styles from './productCard.module.css';
@@ -9,10 +9,12 @@ const ProductCard = ({
     product,
     increaseCounter,
     decrementCounter,
+    theme,
 }: {
     product: Product;
     increaseCounter: () => void;
     decrementCounter: () => void;
+    theme: string;
 }) => {
     const [isCart, setIsCart] = useState(false);
 
@@ -31,7 +33,7 @@ const ProductCard = ({
     };
 
     return (
-        <li className={styles.product}>
+        <li className={`${styles.product} ${theme === 'light' ? 'active' : ''}`}>
             <div className={styles.container}>
                 <div className={styles.container_img}>
                     <img className={styles.img} src={product.images[0]} alt="" />
@@ -44,7 +46,7 @@ const ProductCard = ({
                     </div>
 
                     <div className={styles.cart} onClick={changeCart}>
-                        <img className={styles.cart_button} src={cart} alt="cart" />
+                        <IconCart color={theme === 'light' ? undefined : '#FFF'} />
                         {isCart && (
                             <div className={styles.select_cart}>
                                 <span className={styles.save_cart}>1</span>

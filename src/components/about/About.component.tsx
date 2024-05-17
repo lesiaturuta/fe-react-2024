@@ -1,10 +1,9 @@
 import styles from './about.module.css';
 
-function App() {
+const App = ({ theme }: { theme: string }) => {
     const name = 'Lesia';
-
     return (
-        <main className={styles.main}>
+        <main className={`${styles.main} ${theme === 'light' ? styles.light_theme : styles.dark_theme}`}>
             <div className={styles.container}>
                 <div className={styles.about}>
                     <h1 className={`${styles.about__title} ${styles.mt_60}`}>About me</h1>
@@ -28,6 +27,6 @@ function App() {
             </div>
         </main>
     );
-}
+};
 
 export default App;
