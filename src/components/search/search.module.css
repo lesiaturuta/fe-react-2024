@@ -1,0 +1,121 @@
+.light_theme {
+  --bg-primary: var(--bg-primary-light);
+  --color-pimary: var(--color-primary-light);
+  --color-gray: var(--color-primary-gray);
+  --bg-input: var(--bg-input-light);
+  --color-input: var(--bg-input-dark);
+}
+
+.dark_theme {
+  --bg-primary: var(--bg-primary-dark);
+  --color-pimary: var(--color-primary-dark);
+  --color-gray: var(--color-primary-dark);
+  --bg-input: var(--bg-input-dark);
+  --color-input: var(--bg-input-light);
+}
+
+.main {
+  min-height: 40px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  flex-wrap: wrap;
+  background: var(--bg-primary);
+}
+
+.search {
+  height: 40px;
+  display: flex;
+  position: relative;
+  max-width: 275px;
+  flex-wrap: wrap;
+}
+
+.search_input {
+  border-radius: 20px;
+  background: var(--bg-input);
+  border: 1px solid #F1F1F1;
+  padding: 0 60px 0 20px;
+  color: #111;
+}
+
+.search_input::placeholder {
+  color: var(--color-input);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+.btn_icon {
+  background-color: #EF4934;
+  border-radius: 40px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.icon {
+  position: absolute;
+  top: calc(50% - 9px);
+  left: calc(50% - 9px);
+}
+
+.select {
+  margin-left: 10px;
+  padding-right: 20px; /* Увеличьте значение для большего отступа */
+}
+
+.select_item {
+  background: #FFF;
+  color: #111;
+}
+
+.change {
+  display: flex;
+}
+
+.buttons {
+  display: flex;
+  margin-right: 39px;
+}
+
+.btn,
+.select {
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid #E1E1E1;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  color: var(--color-gray);
+}
+
+.sort_name {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  color: var(--color-pimary);
+}
+
+.select:focus {
+  background: #EF4934;
+  color: #FFF;
+}
+
+.btn:focus {
+  background: #EF4934;
+  color: #FFF;
+}
+
+/*HELPER*/
+
+.mr_10 {
+  margin-right: 10px;
+}

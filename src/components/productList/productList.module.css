@@ -8,14 +8,22 @@
   --color-pimary: var(--color-primary-dark)
 }
 
+.main {
+  background: var(--bg-primary);
+}
+
 .products {
   display: grid;
   flex: 1;
   grid-template-columns: repeat(5, 1fr);
   row-gap: 15px;
   column-gap: 25px;
-  padding: 15px 30px;
-  background: var(--bg-primary);
+  padding: 52px 30px 30px;
+  flex-direction: column;
+}
+
+.search {
+  margin-top: 53px;
 }
 
 @media screen and (max-width: 1500px) {

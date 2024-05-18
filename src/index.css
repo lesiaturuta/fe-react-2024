@@ -18,6 +18,10 @@
 
   --color-primary-light: #111;
   --color-primary-dark: #FFF;
+
+  --color-primary-gray: #656565;
+  --bg-input-light: #F1F1F1;
+  --bg-input-dark: #333;
 }
 
 a {
