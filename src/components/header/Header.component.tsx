@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { clsx } from 'clsx';
+
 import IconCart from '@/assets/icons/IconCart.component.tsx';
 import logOut from '@/assets/icons/log_Out.svg';
 import logo from '@/assets/icons/logo.svg';
@@ -35,9 +37,12 @@ const Header = ({
             <ThemesComponent theme={theme} changeTheme={changeTheme} />
             <nav className={styles.nav}>
                 <ul className={styles.nav__items}>
-                    <li className={`${styles.nav__item} ${styles.mr_49}`}>
+                    <li className={clsx(styles.nav__item, styles.mr_49)}>
                         <button
-                            className={`${styles.nav__link} ${activeNavItem === 'About' && styles.nav__link__active}`}
+                            className={clsx({
+                                [styles.nav__link]: true,
+                                [styles.nav__link__active]: activeNavItem === 'About',
+                            })}
                             onClick={() => handleNavClick('About')}
                         >
                             About
@@ -46,7 +51,10 @@ const Header = ({
                     <li className={styles.nav__item}>
                         <button
                             type="button"
-                            className={`${styles.nav__link} ${activeNavItem === 'Products' && styles.nav__link__active}`}
+                            className={clsx({
+                                [styles.nav__link]: true,
+                                [styles.nav__link__active]: activeNavItem === 'Products',
+                            })}
                             onClick={() => handleNavClick('Products')}
                         >
                             Products
@@ -56,7 +64,7 @@ const Header = ({
             </nav>
             <div className={styles.buttons}>
                 <div className={styles.cart}>
-                    <IconCart color={'#FFF'} />
+                    <IconCart />
                     {amountCart > 0 && (
                         <div className={styles1.select_cart}>
                             <span className={styles.save_cart}>{amountCart}</span>
@@ -68,7 +76,7 @@ const Header = ({
             </div>
             <div className={styles.cart_and_burger}>
                 <div className={styles.cart}>
-                    <IconCart color={'#FFF'} />
+                    <IconCart />
                     {amountCart > 0 && (
                         <div className={styles1.select_cart}>
                             <span className={styles.save_cart}>{amountCart}</span>

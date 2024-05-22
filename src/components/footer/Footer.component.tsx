@@ -1,3 +1,5 @@
+import { clsx } from 'clsx';
+
 import fb from '@/assets/icons/socialMedia/fb.svg';
 import instagram from '@/assets/icons/socialMedia/insta.svg';
 import linkedin from '@/assets/icons/socialMedia/linkedin.svg';
@@ -13,7 +15,13 @@ const socialMedia = [
 ];
 
 const Footer = ({ theme }: { theme: string }) => (
-    <footer className={`${styles.footer} ${theme === 'light' ? styles.light_theme : styles.dark_theme}`}>
+    <footer
+        className={clsx({
+            [styles.footer]: true,
+            light_theme: theme === 'light',
+            dark_theme: theme === 'dark',
+        })}
+    >
         <div className={styles.horizontalLine}></div>
         <div className={styles.content}>
             <FooterIcons className={styles.social_items} media={socialMedia} />

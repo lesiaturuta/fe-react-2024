@@ -1,4 +1,4 @@
-const IconSun = ({ color = '#656565' }: { color?: string }) => (
+const IconSun = ({ color }: { color: string }) => (
     <svg width="30" height="34" viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1264_2371)">
             <path

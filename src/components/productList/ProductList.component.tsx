@@ -1,3 +1,5 @@
+import { clsx } from 'clsx';
+
 import ProductCard from '@/components/productCard/ProductCard.component.tsx';
 import Search from '@/components/search/Search.component.tsx';
 import type Product from '@/interface/product.ts';
@@ -15,7 +17,13 @@ const ProductList = ({
     decrementCounter: () => void;
     theme: string;
 }) => (
-    <div className={`${styles.main} ${theme === 'light' ? styles.light_theme : styles.dark_theme}`}>
+    <div
+        className={clsx({
+            [styles.main]: true,
+            light_theme: theme === 'light',
+            dark_theme: theme === 'dark',
+        })}
+    >
         <div className={styles.search}>
             <Search theme={theme} />
         </div>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { clsx } from 'clsx';
+
 import IconCart from '@/assets/icons/IconCart.component.tsx';
 import type Product from '@/interface/product.ts';
 
@@ -33,7 +35,11 @@ const ProductCard = ({
     };
 
     return (
-        <li className={`${styles.product} ${theme === 'light' ? 'active' : ''}`}>
+        <li
+            className={clsx({
+                [styles.product]: true,
+            })}
+        >
             <div className={styles.container}>
                 <div className={styles.container_img}>
                     <img className={styles.img} src={product.images[0]} alt="" />
@@ -46,7 +52,7 @@ const ProductCard = ({
                     </div>
 
                     <div className={styles.cart} onClick={changeCart}>
-                        <IconCart color={theme === 'light' ? undefined : '#FFF'} />
+                        <IconCart color={theme === 'light' ? '#111' : '#FFF'} />
                         {isCart && (
                             <div className={styles.select_cart}>
                                 <span className={styles.save_cart}>1</span>

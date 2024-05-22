@@ -21,7 +21,34 @@
 
   --color-primary-gray: #656565;
   --bg-input-light: #F1F1F1;
+  --bg-border-light: #F1F1F1;
   --bg-input-dark: #333;
+
+  --bg-select-btn: #EF4934;
+  --color-hr-light: #CCC;
+  --color-hr-dark: #333;
+  --br-product: #CCC;
+  --color-verticalLine: #656565
+}
+
+.light_theme {
+  --bg-primary: var(--bg-primary-light);
+  --color-pimary: var(--color-primary-light);
+  --color-pimary-hover: var(--color-primary-dark);
+  --color-gray: var(--color-primary-gray);
+  --bg-input: var(--bg-input-light);
+  --color-input: var(--bg-input-dark);
+  --color-hr: var(--color-hr-light)
+}
+
+.dark_theme {
+  --bg-primary: var(--bg-primary-dark);
+  --color-pimary: var(--color-primary-dark);
+  --color-pimary-hover: var(--color-primary-dark);
+  --color-gray: var(--color-primary-dark);
+  --bg-input: var(--bg-input-dark);
+  --color-input: var(--bg-input-light);
+  --color-hr: var(--color-hr-dark)
 }
 
 a {
@@ -65,12 +92,12 @@ button {
 }
 
 button:hover {
-  border-color: #646CFF;
+  /*border-color: #646CFF;*/
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  /*outline: 4px auto -webkit-focus-ring-color;*/
 }
 
 @media (prefers-color-scheme: light) {
