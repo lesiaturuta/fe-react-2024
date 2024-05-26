@@ -6,8 +6,16 @@ import search from '@/assets/icons/search.svg';
 
 import styles from './search.module.css';
 
-const Search = ({ theme }: { theme: string }) => {
-    const nameSelect: string[] = ['Price (High - Low)', 'Price (Low- High)', 'Newest', 'Oldest'];
+const Search = ({
+    theme,
+    getProductsByCategory,
+    getSortByName,
+}: {
+    theme: string;
+    getProductsByCategory: (name: string) => void;
+    getSortByName: (name: string) => void;
+}) => {
+    const nameSelect: string[] = ['Price (High - Low)', 'Price (Low - High)', 'Newest', 'Oldest'];
 
     const [selectedSort, setSelectedSort] = React.useState<string>(nameSelect[0]);
     const [isOpenDropDropDown, setIsOpenDropDropDown] = React.useState<boolean>(false);
@@ -28,9 +36,15 @@ const Search = ({ theme }: { theme: string }) => {
             </div>
             <div className={styles.change}>
                 <div className={styles.buttons}>
-                    <button className={clsx(styles.btn, styles.mr_10)}>Electronics</button>
-                    <button className={clsx(styles.btn, styles.mr_10)}>Shoes</button>
-                    <button className={styles.btn}>Clothes</button>
+                    <button onClick={() => getProductsByCategory('Electronics')} className={clsx(styles.btn, styles.mr_10)}>
+                        Electronics
+                    </button>
+                    <button onClick={() => getProductsByCategory('Shoes')} className={clsx(styles.btn, styles.mr_10)}>
+                        Shoes
+                    </button>
+                    <button onClick={() => getProductsByCategory('Clothes')} className={styles.btn}>
+                        Clothes
+                    </button>
                 </div>
                 <div className={styles.sort}>
                     <span className={styles.sort_name}>Sort by:</span>
@@ -67,6 +81,7 @@ const Search = ({ theme }: { theme: string }) => {
                                                     onClick={() => {
                                                         setSelectedSort(option);
                                                         setIsOpenDropDropDown(false);
+                                                        getSortByName(option);
                                                     }}
                                                 >
                                                     {option}

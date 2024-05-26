@@ -22,7 +22,8 @@
   background: var(--bg-input);
   padding: 0 60px 0 20px;
   border: none;
-  color: var(--color-pimary)
+  color: var(--color-pimary);
+  flex-wrap: wrap;
 }
 
 input:focus {
@@ -38,6 +39,7 @@ input:focus {
 }
 
 .btn_icon {
+  flex-wrap: wrap;
   background: var(--bg-select-btn);
   border-radius: 40px;
   height: 100%;
@@ -69,6 +71,7 @@ input:focus {
 .buttons {
   display: flex;
   margin-right: 39px;
+  flex-wrap: wrap;
 }
 
 .btn,
@@ -88,6 +91,7 @@ input:focus {
 }
 
 .sort {
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
 }
