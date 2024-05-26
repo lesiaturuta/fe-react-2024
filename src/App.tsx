@@ -49,7 +49,7 @@ const App = () => {
         setProducts(getProductsByIndex(filterProducts, pagination.start, pagination.end));
         setNumberPage(pagination.end / step);
         setTotalPages(Math.ceil(totalProducts / step));
-        if (Math.ceil(totalProducts / step) < pagination.end / step && Math.ceil(totalProducts / step) > 1 && pagination.end / step > 1) {
+        if (Math.ceil(totalProducts / step) < pagination.end / step && Math.ceil(totalProducts / step) > 0 && pagination.end / step > 0) {
             setPagination({
                 start: (Math.ceil(totalProducts / step) - 1) * step,
                 end: (Math.ceil(totalProducts / step) - 1) * step + step,
