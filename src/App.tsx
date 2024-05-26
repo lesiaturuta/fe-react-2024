@@ -40,8 +40,6 @@ const App = () => {
                 setAllProducts(data);
                 updateLocalCart(data);
                 setFilterProducts(data);
-                setProducts(getProductsByIndex(data, pagination.start, pagination.end));
-                setNumberPage(pagination.end / step);
             })
             .catch((error) => console.error(error));
     }, []);
@@ -64,28 +62,20 @@ const App = () => {
     useEffect(() => {
         if (width > 1500) {
             const newPagination = { start: 0, end: 10 };
-            if (pagination.end !== newPagination.end) {
-                setStep(10);
-                setPagination(newPagination);
-            }
+            setStep(10);
+            setPagination(newPagination);
         } else if (width > 1220) {
             const newPagination = { start: 0, end: 8 };
-            if (pagination.end !== newPagination.end) {
-                setStep(8);
-                setPagination(newPagination);
-            }
+            setStep(8);
+            setPagination(newPagination);
         } else if (width > 890) {
             const newPagination = { start: 0, end: 6 };
-            if (pagination.end !== newPagination.end) {
-                setStep(6);
-                setPagination(newPagination);
-            }
+            setStep(6);
+            setPagination(newPagination);
         } else if (width > 575) {
             const newPagination = { start: 0, end: 4 };
-            if (pagination.end !== newPagination.end) {
-                setStep(4);
-                setPagination(newPagination);
-            }
+            setStep(4);
+            setPagination(newPagination);
         }
     }, [width]);
 
