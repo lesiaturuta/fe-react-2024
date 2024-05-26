@@ -1,10 +1,19 @@
+.main {
+  background: var(--bg-primary);
+  flex: 1;
+}
+
 .products {
   display: grid;
-  flex: 1;
   grid-template-columns: repeat(5, 1fr);
   row-gap: 15px;
   column-gap: 25px;
-  padding: 15px 30px;
+  padding: 52px 30px 30px;
+  flex-direction: column;
+}
+
+.search {
+  margin-top: 53px;
 }
 
 @media screen and (max-width: 1500px) {
@@ -22,6 +31,14 @@
 }
 
 @media screen and (max-width: 890px) {
+
+  .search {
+    margin-top: 30px;
+  }
+
+  .products {
+    padding: 30px;
+  }
 
   .products {
     grid-template-columns: repeat(2, 1fr);

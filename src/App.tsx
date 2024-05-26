@@ -10,9 +10,20 @@ import getData from '@/utils/getData.ts';
 import './App.css';
 
 const App = () => {
+    let defaultTheme: string = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (localStorage.getItem('theme')) {
+        defaultTheme = localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
+    }
+
     const [amountCart, setAmountCart] = useState<number>(0);
     const [products, setProducts] = useState<Product[]>([]);
     const [isProduct, setIsProduct] = useState<boolean>(false);
+    const [theme, setTheme] = useState<string>(defaultTheme);
+
+    const changeTheme = (name: string) => {
+        name === 'light' ? setTheme('light') : setTheme('dark');
+        localStorage.setItem('theme', name === 'light' ? 'light' : 'dark');
+    };
 
     useEffect(() => {
         getData('https://ma-backend-api.mocintra.com/api/v1/products')
@@ -45,10 +56,12 @@ const App = () => {
 
     return (
         <div className="body">
-            <HeaderComponent amountCart={amountCart} toggleCurrentPage={toggleCurrentPage} />
-            {!isProduct && <AboutComponent />}
-            {isProduct && <ProductList products={products} increaseCounter={increaseCounter} decrementCounter={decrementCounter} />}
-            <FooterComponent />
+            <HeaderComponent theme={theme} amountCart={amountCart} toggleCurrentPage={toggleCurrentPage} changeTheme={changeTheme} />
+            {!isProduct && <AboutComponent theme={theme} />}
+            {isProduct && (
+                <ProductList theme={theme} products={products} increaseCounter={increaseCounter} decrementCounter={decrementCounter} />
+            )}
+            <FooterComponent theme={theme} />
         </div>
     );
 };

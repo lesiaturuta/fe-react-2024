@@ -4,13 +4,15 @@
   padding: 0 30px;
   min-height: 160px;
   justify-content: space-between;
+  background: var(--bg-primary) ;
+  color: var(--color-pimary);
 }
 
 .horizontalLine {
   height: 1px;
   max-width: 100%;
   margin: 0 13px;
-  background-color: #CCC;
+  background-color: var(--color-hr);
 }
 
 .content {
@@ -35,7 +37,7 @@
 }
 
 .link {
-  color: #EF4934;
+  color: var(--bg-select-btn);
 }
 
 @media screen and (max-width: 880px) {

@@ -1,9 +1,10 @@
 .product {
   width: 100%;
   border-radius: 20px;
-  border: 1px solid #CCC;
+  border: 1px solid var(--br-product);
   min-height: 344px;
   padding: 15px 20px;
+  color: var(--color-pimary);
 }
 
 .container {
@@ -66,7 +67,7 @@
   width: 17px;
   height: 17px;
   border-radius: 9px;
-  background: #EF4934;
+  background: var(--bg-select-btn);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,4 +78,17 @@
   font-weight: 700;
   line-height: 12px;
   text-align: center;
+}
+
+@media screen and (max-width: 575px) {
+
+  .product {
+    margin: 0 auto;
+    max-width: 275px;
+    padding: 15px 37px;
+  }
+
+  .img {
+    width: 100%;
+  }
 }

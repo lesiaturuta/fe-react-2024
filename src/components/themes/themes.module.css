@@ -1,0 +1,13 @@
+.theme_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+.theme_icon {
+  height: 100%;
+}
