@@ -18,8 +18,7 @@ const ProductList = ({
     theme: string;
 }) => (
     <div
-        className={clsx({
-            [styles.main]: true,
+        className={clsx(styles.main, {
             light_theme: theme === 'light',
             dark_theme: theme === 'dark',
         })}

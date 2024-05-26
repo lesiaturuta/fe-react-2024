@@ -167,3 +167,41 @@ input:focus {
 .mr_10 {
   margin-right: 10px;
 }
+
+@media screen and (max-width: 1220px) {
+
+  .main {
+    width: 100%;
+    flex-direction: row;
+  }
+
+
+  .search {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .search_input {
+    width: 100%;
+  }
+
+  .change {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .buttons {
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    min-width: 0;
+  }
+
+  .sort {
+    margin-top: 20px;
+  }
+}

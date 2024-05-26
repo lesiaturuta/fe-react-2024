@@ -15,8 +15,7 @@ const Search = ({ theme }: { theme: string }) => {
     // , setSelectedSort] = React.useState<string>(nameSelect[0]);
     return (
         <div
-            className={clsx({
-                [styles.main]: true,
+            className={clsx(styles.main, {
                 light_theme: theme === 'light',
                 dark_theme: theme === 'dark',
             })}
@@ -36,12 +35,7 @@ const Search = ({ theme }: { theme: string }) => {
                 <div className={styles.sort}>
                     <span className={styles.sort_name}>Sort by:</span>
 
-                    <div
-                        className={clsx({
-                            [styles.drop_down]: true,
-                            // [styles.select_background]: isOpenDropDropDown,
-                        })}
-                    >
+                    <div className={clsx(styles.drop_down)}>
                         <div
                             className={clsx({
                                 [styles.select_background]: isOpenDropDropDown,

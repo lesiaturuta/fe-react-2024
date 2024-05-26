@@ -6,8 +6,7 @@ const About = ({ theme }: { theme: string }) => {
     const name = 'Lesia';
     return (
         <main
-            className={clsx({
-                [styles.main]: true,
+            className={clsx(styles.main, {
                 light_theme: theme === 'light',
                 dark_theme: theme === 'dark',
             })}

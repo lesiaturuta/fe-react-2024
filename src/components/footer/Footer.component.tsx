@@ -16,8 +16,7 @@ const socialMedia = [
 
 const Footer = ({ theme }: { theme: string }) => (
     <footer
-        className={clsx({
-            [styles.footer]: true,
+        className={clsx(styles.footer, {
             light_theme: theme === 'light',
             dark_theme: theme === 'dark',
         })}
