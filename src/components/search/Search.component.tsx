@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { clsx } from 'clsx';
 
@@ -17,8 +17,8 @@ const Search = ({
 }) => {
     const nameSelect: string[] = ['Price (High - Low)', 'Price (Low - High)', 'Newest', 'Oldest'];
 
-    const [selectedSort, setSelectedSort] = React.useState<string>(nameSelect[0]);
-    const [isOpenDropDropDown, setIsOpenDropDropDown] = React.useState<boolean>(false);
+    const [selectedSort, setSelectedSort] = useState<string>(nameSelect[0]);
+    const [isOpenDropDropDown, setIsOpenDropDropDown] = useState<boolean>(false);
 
     // , setSelectedSort] = React.useState<string>(nameSelect[0]);
     return (

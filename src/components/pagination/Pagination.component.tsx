@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { clsx } from 'clsx';
 
@@ -24,7 +24,17 @@ const PaginationComponent = ({
             <button className={clsx(styles.btn, styles.mr_5)} disabled={page === 1} onClick={decrementPage}>
                 <ChevronLeft color={page === 1 ? '#CCC' : color} />
             </button>
+            {page - 1 > 0 && (
+                <button className={clsx(styles.btn, styles.mr_5)} onClick={decrementPage}>
+                    {page - 1}
+                </button>
+            )}
             <div className={clsx(styles.page, styles.mr_5)}>{page}</div>
+            {maxPages >= page + 1 && (
+                <button className={clsx(styles.btn, styles.mr_5)} onClick={increasePage}>
+                    {page + 1}
+                </button>
+            )}
             <button className={styles.btn} disabled={page === maxPages} onClick={increasePage}>
                 <ChevronRight color={page === maxPages ? '#CCC' : color} />
             </button>
