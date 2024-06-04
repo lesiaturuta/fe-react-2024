@@ -1,0 +1,34 @@
+.main {
+  margin-top: 70px;
+  margin-bottom: 70px;
+  display: flex;
+}
+
+.page, .btn {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--color-pimary);
+}
+
+.page {
+  background: var(--bg-select-btn);
+  color: var(--bg-primary-light);
+  font-weight: 700;
+}
+
+.btn {
+  background: none;
+  border: 1px solid #F1F1F1;
+}
+
+/*HELPER*/
+
+.mr_5 {
+  margin-right: 5px;
+}
+
