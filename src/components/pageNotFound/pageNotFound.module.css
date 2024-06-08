@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg-primary);
+}
+
+.title {
+  font-size: 50px;
+  color: var(--color-pimary);
+}
+
+.link {
+  margin-top: 10px;
+  padding: 20px;
+  background: var(--color-pimary);
+  border-radius: 10px;
+  color: var(--bg-primary);
+}
+
+.link:hover {
+  color: var(--bg-primary);
+  transform: scale(1.1);
+}

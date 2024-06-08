@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import AboutComponent from '@/components/about/About.component.tsx';
-import FooterComponent from '@/components/footer/Footer.component.tsx';
-import HeaderComponent from '@/components/header/Header.component.tsx';
+import About from '@/components/about/About.component.tsx';
+import LayoutComponent from '@/components/LayoutComponent/LayoutComponent.tsx';
 import { useResize } from '@/components/myHooks/use-resize';
+import PageNotFound from '@/components/pageNotFound/PageNotFound.components.tsx';
 import ProductList from '@/components/productList/ProductList.component.tsx';
 import { PagesContext } from '@/context/PagesContext.tsx';
 import type Product from '@/interface/product.ts';
@@ -21,7 +22,6 @@ const App = () => {
     const [allProducts, setAllProducts] = useState<Product[]>([]);
     const [filterProducts, setFilterProducts] = useState<Product[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
-    const [isProduct, setIsProduct] = useState<boolean>(false);
     const [theme, setTheme] = useState<string>(defaultTheme);
     const [step, setStep] = useState<number>(10);
 
@@ -141,26 +141,33 @@ const App = () => {
         });
     };
 
-    const toggleCurrentPage = (link: String) => (link === 'About' ? setIsProduct(false) : setIsProduct(true));
-
     return (
         <div className="body">
             <PagesContext.Provider value={{ page: numberPage, maxPages: totalPages }}>
-                <HeaderComponent theme={theme} amountCart={amountCart} toggleCurrentPage={toggleCurrentPage} changeTheme={changeTheme} />
-                {!isProduct && <AboutComponent theme={theme} />}
-                {isProduct && (
-                    <ProductList
-                        theme={theme}
-                        products={products}
-                        increasePage={increasePage}
-                        decrementPage={decrementPage}
-                        increaseCounter={increaseCounter}
-                        decrementCounter={decrementCounter}
-                        getProductsByCategory={getProductsByCategory}
-                        getSortByName={getSortByName}
-                    />
-                )}
-                <FooterComponent theme={theme} />
+                <Routes>
+                    <Route
+                        path={'/fe-react-2024/'}
+                        element={<LayoutComponent theme={theme} amountCart={amountCart} changeTheme={changeTheme} />}
+                    >
+                        <Route path={'/fe-react-2024/'} index element={<About theme={theme} />} />
+                        <Route
+                            path={'/fe-react-2024/ProductsPage'}
+                            element={
+                                <ProductList
+                                    theme={theme}
+                                    products={products}
+                                    increasePage={increasePage}
+                                    decrementPage={decrementPage}
+                                    increaseCounter={increaseCounter}
+                                    decrementCounter={decrementCounter}
+                                    getProductsByCategory={getProductsByCategory}
+                                    getSortByName={getSortByName}
+                                />
+                            }
+                        />
+                    </Route>
+                    <Route path={'*'} element={<PageNotFound theme={theme} />} />
+                </Routes>
             </PagesContext.Provider>
         </div>
     );
