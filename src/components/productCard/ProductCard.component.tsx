@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { clsx } from 'clsx';
 
@@ -44,7 +45,9 @@ const ProductCard = ({
                 <div className={styles.container_img}>
                     <img className={styles.img} src={product.images[0]} alt="" />
                 </div>
-                <p className={styles.title}>{product.title}</p>
+                <Link to={`/product/${product.id}`} className={styles.title}>
+                    {product.title}
+                </Link>
                 <div className={styles.price_and_cart}>
                     <div>
                         <span className={styles.price}>{product.price}</span>

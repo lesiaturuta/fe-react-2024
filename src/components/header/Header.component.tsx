@@ -2,11 +2,11 @@ import { NavLink } from 'react-router-dom';
 
 import { clsx } from 'clsx';
 
+import cart from '@/assets/icons/cart.svg';
 import IconCart from '@/assets/icons/IconCart.component.tsx';
 import logOut from '@/assets/icons/log_Out.svg';
 import logo from '@/assets/icons/logo.svg';
 import burger from '@/assets/icons/menu_Duo_LG.svg';
-import userAddIcon from '@/assets/icons/user_Add.svg';
 import ThemesComponent from '@/components/themes/Themes.component.tsx';
 import Button from '@/UI/button/Button.components.tsx';
 
@@ -20,19 +20,12 @@ const Header = ({ amountCart, theme, changeTheme }: { amountCart: number; theme:
         <nav className={styles.nav}>
             <ul className={styles.nav__items}>
                 <li className={clsx(styles.nav__item, styles.mr_49)}>
-                    <NavLink
-                        to="/fe-react-2024/"
-                        end
-                        className={({ isActive }) => clsx(styles.nav__link, { [styles.nav__link__active]: isActive })}
-                    >
+                    <NavLink to="/" end className={({ isActive }) => clsx(styles.nav__link, { [styles.nav__link__active]: isActive })}>
                         About
                     </NavLink>
                 </li>
                 <li className={styles.nav__item}>
-                    <NavLink
-                        to="/fe-react-2024/ProductsPage"
-                        className={({ isActive }) => clsx(styles.nav__link, { [styles.nav__link__active]: isActive })}
-                    >
+                    <NavLink to="/products" className={({ isActive }) => clsx(styles.nav__link, { [styles.nav__link__active]: isActive })}>
                         Products
                     </NavLink>
                 </li>
@@ -48,7 +41,7 @@ const Header = ({ amountCart, theme, changeTheme }: { amountCart: number; theme:
                 )}
             </div>
             <Button className={styles.mr_10} name="Login" backgroundColor="#333" icon={logOut} />
-            <Button name="Sign up" backgroundColor="#EF4934" icon={userAddIcon} />
+            <Button name="Sign up" backgroundColor="#EF4934" icon={cart} />
         </div>
         <div className={styles.cart_and_burger}>
             <div className={styles.cart}>

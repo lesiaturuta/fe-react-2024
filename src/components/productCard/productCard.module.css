@@ -23,6 +23,7 @@
 }
 
 .title {
+  color: var(--color-pimary);
   margin-top: 20px;
   font-size: 22px;
   font-weight: 600;

@@ -6,6 +6,7 @@ import LayoutComponent from '@/components/LayoutComponent/LayoutComponent.tsx';
 import { useResize } from '@/components/myHooks/use-resize';
 import PageNotFound from '@/components/pageNotFound/PageNotFound.components.tsx';
 import ProductList from '@/components/productList/ProductList.component.tsx';
+import ProductPageComponent from '@/components/ProductPage/ProductPage.component.tsx';
 import { PagesContext } from '@/context/PagesContext.tsx';
 import type Product from '@/interface/product.ts';
 import getData from '@/utils/getData.ts';
@@ -145,13 +146,10 @@ const App = () => {
         <div className="body">
             <PagesContext.Provider value={{ page: numberPage, maxPages: totalPages }}>
                 <Routes>
-                    <Route
-                        path={'/fe-react-2024/'}
-                        element={<LayoutComponent theme={theme} amountCart={amountCart} changeTheme={changeTheme} />}
-                    >
-                        <Route path={'/fe-react-2024/'} index element={<About theme={theme} />} />
+                    <Route path={'/'} element={<LayoutComponent theme={theme} amountCart={amountCart} changeTheme={changeTheme} />}>
+                        <Route path={'/'} index element={<About theme={theme} />} />
                         <Route
-                            path={'/fe-react-2024/ProductsPage'}
+                            path={'/products'}
                             element={
                                 <ProductList
                                     theme={theme}
@@ -165,6 +163,7 @@ const App = () => {
                                 />
                             }
                         />
+                        <Route path={'/product/:id'} element={<ProductPageComponent theme={theme} />} />{' '}
                     </Route>
                     <Route path={'*'} element={<PageNotFound theme={theme} />} />
                 </Routes>

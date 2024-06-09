@@ -57,6 +57,7 @@
 .nav__link:hover {
   text-decoration: underline;
   font-weight: 700;
+  color: var(--bg-input-light);
   transform: scale(1.1);
 }
 

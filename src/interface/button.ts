@@ -4,6 +4,8 @@ interface ButtonInterface {
     textColor?: string;
     icon?: string;
     className?: string;
+    widthIcon?: number;
+    heightIcon?: number;
 }
 
 export default ButtonInterface;
