@@ -38,9 +38,9 @@ const App = () => {
     useEffect(() => {
         getData('https://ma-backend-api.mocintra.com/api/v1/products')
             .then((data) => {
-                setAllProducts(data);
-                updateLocalCart(data);
-                setFilterProducts(data);
+                setAllProducts(data.products);
+                updateLocalCart(data.products);
+                setFilterProducts(data.products);
             })
             .catch((error) => console.error(error));
     }, []);
@@ -147,9 +147,9 @@ const App = () => {
             <PagesContext.Provider value={{ page: numberPage, maxPages: totalPages }}>
                 <Routes>
                     <Route path={'/'} element={<LayoutComponent theme={theme} amountCart={amountCart} changeTheme={changeTheme} />}>
-                        <Route path={'/'} index element={<About theme={theme} />} />
+                        <Route index element={<About theme={theme} />} />
                         <Route
-                            path={'/products'}
+                            path={'products'}
                             element={
                                 <ProductList
                                     theme={theme}
@@ -163,7 +163,7 @@ const App = () => {
                                 />
                             }
                         />
-                        <Route path={'/product/:id'} element={<ProductPageComponent theme={theme} />} />{' '}
+                        <Route path={'product/:id'} element={<ProductPageComponent theme={theme} />} />
                     </Route>
                     <Route path={'*'} element={<PageNotFound theme={theme} />} />
                 </Routes>
