@@ -1,26 +1,41 @@
+import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 import { clsx } from 'clsx';
 
 import search from '@/assets/icons/search.svg';
+import type { CategoryName } from '@/interface';
 
 import styles from './search.module.css';
 
 const Search = ({
     theme,
-    getProductsByCategory,
+    getProductsById,
     getSortByName,
+    getSearchValue,
 }: {
     theme: string;
-    getProductsByCategory: (name: string) => void;
+    getProductsById: (name: CategoryName) => void;
     getSortByName: (name: string) => void;
+    getSearchValue: (value: string) => void;
 }) => {
     const nameSelect: string[] = ['Price (High - Low)', 'Price (Low - High)', 'Newest', 'Oldest'];
 
     const [selectedSort, setSelectedSort] = useState<string>(nameSelect[0]);
+    const [nameCategory, setNameCategory] = useState<string>('');
     const [isOpenDropDropDown, setIsOpenDropDropDown] = useState<boolean>(false);
+    const [searchValue, setSearchValue] = useState<string>('');
 
-    // , setSelectedSort] = React.useState<string>(nameSelect[0]);
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(event.target.value);
+    };
+
+    const selectCategory = (name: CategoryName) => {
+        const newName = name === nameCategory ? '' : name;
+        setNameCategory(newName);
+        getProductsById(newName);
+    };
+
     return (
         <div
             className={clsx(styles.main, {
@@ -29,20 +44,34 @@ const Search = ({
             })}
         >
             <div className={styles.search}>
-                <input className={styles.search_input} type="text" placeholder="Search..." />
-                <button className={styles.btn_icon}>
+                <input className={styles.search_input} type="text" value={searchValue} onChange={handleChange} placeholder="Search..." />
+                <button
+                    className={styles.btn_icon}
+                    onClick={() => {
+                        getSearchValue(searchValue);
+                    }}
+                >
                     <img className={styles.icon} src={search} alt="" />
                 </button>
             </div>
             <div className={styles.change}>
                 <div className={styles.buttons}>
-                    <button onClick={() => getProductsByCategory('Electronics')} className={clsx(styles.btn, styles.mr_10)}>
+                    <button
+                        onClick={() => selectCategory('Electronics')}
+                        className={clsx(styles.btn, styles.mr_10, { [styles.btn_active]: nameCategory === 'Electronics' })}
+                    >
                         Electronics
                     </button>
-                    <button onClick={() => getProductsByCategory('Shoes')} className={clsx(styles.btn, styles.mr_10)}>
+                    <button
+                        onClick={() => selectCategory('Shoes')}
+                        className={clsx(styles.btn, styles.mr_10, { [styles.btn_active]: nameCategory === 'Shoes' })}
+                    >
                         Shoes
                     </button>
-                    <button onClick={() => getProductsByCategory('Clothes')} className={styles.btn}>
+                    <button
+                        onClick={() => selectCategory('Clothes')}
+                        className={clsx(styles.btn, { [styles.btn_active]: nameCategory === 'Clothes' })}
+                    >
                         Clothes
                     </button>
                 </div>

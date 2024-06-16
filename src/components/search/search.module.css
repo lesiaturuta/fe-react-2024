@@ -104,7 +104,7 @@ input:focus {
   margin-right: 10px;
 }
 
-.btn:focus {
+.btn_active {
   background: var(--bg-select-btn);
   color: var(--bg-primary-light);
   border: none;
