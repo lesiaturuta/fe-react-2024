@@ -45,6 +45,7 @@ const App = () => {
     const [numberPage, setNumberPage] = useState<number>(1);
     const [totalProducts, setTotalProducts] = useState<number>(0);
     const [idCategory, setIdCategory] = useState<number>(0);
+    const [nameCategory, setNameCategory] = useState<string>('');
     const [searchValue, setSearchValue] = useState<string>('');
     const [isLoader, setIsLoader] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
@@ -114,12 +115,10 @@ const App = () => {
     }, [width]);
 
     const getProductsById = (name: CategoryName) => {
-        if (name) {
-            const lowerCaseName = name.toLowerCase() as keyof Category;
-            setIdCategory(categoryId[lowerCaseName]);
-        } else {
-            console.error('Invalid category name');
-        }
+        const lowerCaseName = name.toLowerCase() as keyof Category;
+        const id = categoryId[lowerCaseName];
+        setNameCategory(name);
+        setIdCategory(id);
     };
 
     const getSortByName = (name: string) => {
@@ -209,6 +208,7 @@ const App = () => {
                                             getProductsById={getProductsById}
                                             getSortByName={getSortByName}
                                             getSearchValue={getSearchValue}
+                                            nameCategory={nameCategory}
                                         />
                                     )
                                 }

@@ -13,16 +13,18 @@ const Search = ({
     getProductsById,
     getSortByName,
     getSearchValue,
+    nameCategory,
 }: {
     theme: string;
     getProductsById: (name: CategoryName) => void;
     getSortByName: (name: string) => void;
     getSearchValue: (value: string) => void;
+    nameCategory: string;
 }) => {
     const nameSelect: string[] = ['Price (High - Low)', 'Price (Low - High)', 'Newest', 'Oldest'];
 
     const [selectedSort, setSelectedSort] = useState<string>(nameSelect[0]);
-    const [nameCategory, setNameCategory] = useState<string>('');
+    const [nameThisCategory, setNameThisCategory] = useState<string>(nameCategory || '');
     const [isOpenDropDropDown, setIsOpenDropDropDown] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>('');
 
@@ -32,10 +34,9 @@ const Search = ({
 
     const selectCategory = (name: CategoryName) => {
         const newName = name === nameCategory ? '' : name;
-        setNameCategory(newName);
+        setNameThisCategory(newName);
         getProductsById(newName);
     };
-
     return (
         <div
             className={clsx(styles.main, {
@@ -58,19 +59,19 @@ const Search = ({
                 <div className={styles.buttons}>
                     <button
                         onClick={() => selectCategory('Electronics')}
-                        className={clsx(styles.btn, styles.mr_10, { [styles.btn_active]: nameCategory === 'Electronics' })}
+                        className={clsx(styles.btn, styles.mr_10, { [styles.btn_active]: nameThisCategory === 'Electronics' })}
                     >
                         Electronics
                     </button>
                     <button
                         onClick={() => selectCategory('Shoes')}
-                        className={clsx(styles.btn, styles.mr_10, { [styles.btn_active]: nameCategory === 'Shoes' })}
+                        className={clsx(styles.btn, styles.mr_10, { [styles.btn_active]: nameThisCategory === 'Shoes' })}
                     >
                         Shoes
                     </button>
                     <button
                         onClick={() => selectCategory('Clothes')}
-                        className={clsx(styles.btn, { [styles.btn_active]: nameCategory === 'Clothes' })}
+                        className={clsx(styles.btn, { [styles.btn_active]: nameThisCategory === 'Clothes' })}
                     >
                         Clothes
                     </button>

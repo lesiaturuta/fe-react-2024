@@ -19,6 +19,7 @@ const ProductList = ({
     getProductsById,
     getSortByName,
     getSearchValue,
+    nameCategory,
 }: {
     products: Product[];
     increaseCounter: () => void;
@@ -29,6 +30,7 @@ const ProductList = ({
     getProductsById: (name: CategoryName) => void;
     getSortByName: (name: string) => void;
     getSearchValue: (value: string) => void;
+    nameCategory: string;
 }) => (
     <div
         className={clsx(styles.main, {
@@ -37,7 +39,13 @@ const ProductList = ({
         })}
     >
         <div className={styles.search}>
-            <Search theme={theme} getProductsById={getProductsById} getSortByName={getSortByName} getSearchValue={getSearchValue} />
+            <Search
+                theme={theme}
+                getProductsById={getProductsById}
+                nameCategory={nameCategory}
+                getSortByName={getSortByName}
+                getSearchValue={getSearchValue}
+            />
             {products.length === 0 ? (
                 <Error theme={theme} message={'No product'} />
             ) : (
