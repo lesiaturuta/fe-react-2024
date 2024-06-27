@@ -12,17 +12,11 @@ import PageNotFound from '@/components/pageNotFound/PageNotFound.components.tsx'
 import ProductList from '@/components/productList/ProductList.component.tsx';
 import ProductPageComponent from '@/components/ProductPage/ProductPage.component.tsx';
 import { PagesContext } from '@/context/PagesContext.tsx';
-import type { CategoryName } from '@/interface';
+import type { Category, CategoryName } from '@/interface';
 import type Product from '@/interface/product.ts';
 import getData from '@/utils/getData.ts';
 
 import './App.css';
-
-interface Category {
-    electronics: number;
-    shoes: number;
-    clothes: number;
-}
 
 const App = () => {
     let defaultTheme: string = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -50,9 +44,9 @@ const App = () => {
     const [isLoader, setIsLoader] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
 
-    const changeTheme = (name: string) => {
-        name === 'light' ? setTheme('light') : setTheme('dark');
-        localStorage.setItem('theme', name === 'light' ? 'light' : 'dark');
+    const changeTheme = (newTheme: string) => {
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
     };
 
     useEffect(() => {
