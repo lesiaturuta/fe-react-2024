@@ -1,8 +1,10 @@
 import { clsx } from 'clsx';
 
+import Error from '@/components/Error/Error.components.tsx';
 import PaginationComponent from '@/components/pagination/Pagination.component.tsx';
 import ProductCard from '@/components/productCard/ProductCard.component.tsx';
 import Search from '@/components/search/Search.component.tsx';
+import type { CategoryName } from '@/interface';
 import type Product from '@/interface/product.ts';
 
 import styles from './productList.module.css';
@@ -14,8 +16,10 @@ const ProductList = ({
     increasePage,
     decrementPage,
     theme,
-    getProductsByCategory,
+    getProductsById,
     getSortByName,
+    getSearchValue,
+    nameCategory,
 }: {
     products: Product[];
     increaseCounter: () => void;
@@ -23,8 +27,10 @@ const ProductList = ({
     increasePage: () => void;
     decrementPage: () => void;
     theme: string;
-    getProductsByCategory: (name: string) => void;
+    getProductsById: (name: CategoryName) => void;
     getSortByName: (name: string) => void;
+    getSearchValue: (value: string) => void;
+    nameCategory: string;
 }) => (
     <div
         className={clsx(styles.main, {
@@ -33,21 +39,31 @@ const ProductList = ({
         })}
     >
         <div className={styles.search}>
-            <Search theme={theme} getProductsByCategory={getProductsByCategory} getSortByName={getSortByName} />
-            <ul className={styles.products}>
-                {products.map((product: Product) => (
-                    <ProductCard
-                        theme={theme}
-                        product={product}
-                        increaseCounter={increaseCounter}
-                        decrementCounter={decrementCounter}
-                        key={product.id}
-                    />
-                ))}
-            </ul>
+            <Search
+                theme={theme}
+                getProductsById={getProductsById}
+                nameCategory={nameCategory}
+                getSortByName={getSortByName}
+                getSearchValue={getSearchValue}
+            />
+            {products.length === 0 ? (
+                <Error theme={theme} message={'No product'} />
+            ) : (
+                <ul className={styles.products}>
+                    {products.map((product: Product) => (
+                        <ProductCard
+                            theme={theme}
+                            product={product}
+                            increaseCounter={increaseCounter}
+                            decrementCounter={decrementCounter}
+                            key={product.id}
+                        />
+                    ))}
+                </ul>
+            )}
         </div>
         <div className={styles.pagination}>
-            <PaginationComponent increasePage={increasePage} decrementPage={decrementPage} theme={theme} />
+            {products.length > 0 && <PaginationComponent increasePage={increasePage} decrementPage={decrementPage} theme={theme} />}
         </div>
     </div>
 );

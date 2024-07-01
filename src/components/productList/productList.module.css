@@ -17,6 +17,9 @@
 
 .search {
   margin-top: 53px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .pagination {
