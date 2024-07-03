@@ -13,10 +13,10 @@ import Button from '@/UI/button/Button.components.tsx';
 import styles1 from '../productCard/productCard.module.css';
 import styles from './header.module.css';
 
-const Header = ({ amountCart, theme, changeTheme }: { amountCart: number; theme: string; changeTheme: (name: string) => void }) => (
+const Header = ({ amountCart, changeTheme }: { amountCart: number; changeTheme: (name: string) => void }) => (
     <header className={styles.header}>
         <img className={styles.mr_49} src={logo} alt="logo" />
-        <ThemesComponent theme={theme} changeTheme={changeTheme} />
+        <ThemesComponent changeTheme={changeTheme} />
         <nav className={styles.nav}>
             <ul className={styles.nav__items}>
                 <li className={clsx(styles.nav__item, styles.mr_49)}>

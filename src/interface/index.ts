@@ -5,3 +5,11 @@ export interface Category {
     shoes: number;
     clothes: number;
 }
+
+export interface GetProductsParameters {
+    url: string;
+}
+
+export interface GetProductParameters {
+    id: string;
+}

@@ -1,23 +1,17 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 import { clsx } from 'clsx';
 
 import ChevronLeft from '@/assets/icons/ChevronLeft.component.tsx';
 import ChevronRight from '@/assets/icons/ChevronRight.component.tsx';
-import { PagesContext } from '@/context/PagesContext.tsx';
+import { selectPagination } from '@/store/pagination/selectors.ts';
+import { selectTheme } from '@/store/theme/selectors.ts';
 
 import styles from './Pagination.module.css';
 
-const PaginationComponent = ({
-    increasePage,
-    decrementPage,
-    theme,
-}: {
-    increasePage: () => void;
-    decrementPage: () => void;
-    theme: string;
-}) => {
-    const { page, maxPages } = useContext(PagesContext);
+const PaginationComponent = ({ increasePage, decrementPage }: { increasePage: () => void; decrementPage: () => void }) => {
+    const theme = useSelector(selectTheme);
+    const { page, maxPages } = useSelector(selectPagination);
     const color = theme === 'dark' ? '#FFF' : '#000';
     return (
         <div className={styles.main}>

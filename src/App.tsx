@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BallTriangle } from 'react-loader-spinner';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
 import { clsx } from 'clsx';
@@ -11,10 +12,14 @@ import { useResize } from '@/components/myHooks/use-resize';
 import PageNotFound from '@/components/pageNotFound/PageNotFound.components.tsx';
 import ProductList from '@/components/productList/ProductList.component.tsx';
 import ProductPageComponent from '@/components/ProductPage/ProductPage.component.tsx';
-import { PagesContext } from '@/context/PagesContext.tsx';
 import type { Category, CategoryName } from '@/interface';
 import type Product from '@/interface/product.ts';
-import getData from '@/utils/getData.ts';
+import type { AppDispatch } from '@/interface/type.ts';
+import { setPaginationPage } from '@/store/pagination/pagination.ts';
+import { selectProducts } from '@/store/productsList/selectors.ts';
+import { getProductsThunk } from '@/store/productsList/thunks.ts';
+import { selectTheme } from '@/store/theme/selectors.ts';
+import { setTheme } from '@/store/theme/theme.ts';
 
 import './App.css';
 
@@ -24,6 +29,10 @@ const App = () => {
         defaultTheme = localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
     }
 
+    const theme = useSelector(selectTheme);
+    const products = useSelector(selectProducts);
+    const dispatch = useDispatch<AppDispatch>();
+
     const categoryId: Category = {
         electronics: 2,
         shoes: 4,
@@ -32,7 +41,6 @@ const App = () => {
 
     const [amountCart, setAmountCart] = useState<number>(0);
     const [allProducts, setAllProducts] = useState<Product[]>([]);
-    const [theme, setTheme] = useState<string>(defaultTheme);
     const [step, setStep] = useState<number>(0);
     const [pagination, setPagination] = useState<{ start: number; end: number }>({ start: 0, end: step });
     const [totalPages, setTotalPages] = useState<number>(0);
@@ -42,33 +50,39 @@ const App = () => {
     const [nameCategory, setNameCategory] = useState<string>('');
     const [searchValue, setSearchValue] = useState<string>('');
     const [isLoader, setIsLoader] = useState<boolean>(false);
-    const [errorMessage, setErrorMessage] = useState<string>('');
+    const [errorMessage] = useState<string>('');
+    const [baseUrl, setBaseUrl] = useState<string>('');
 
     const changeTheme = (newTheme: string) => {
-        setTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
+        dispatch(setTheme(newTheme));
     };
 
     useEffect(() => {
-        setIsLoader(true);
-        const fetchData = async () => {
-            let BASE_URL = `https://ma-backend-api.mocintra.com/api/v1/products?limit=${step}&offset=${pagination.start}`;
-            if (idCategory) BASE_URL = `${BASE_URL}&categoryId=${idCategory}`;
-            if (searchValue.length > 0) BASE_URL = `${BASE_URL}&title=${searchValue}`;
-            try {
-                const response = await getData(BASE_URL);
-                setTotalProducts(response.total);
-                setAllProducts(response.products);
-                setIsLoader(false);
-            } catch (error: any) {
-                console.error('Error fetching data:', error);
-                setErrorMessage(error.message.toString());
-                setIsLoader(false);
-            }
-        };
+        dispatch(setPaginationPage({ page: numberPage, maxPages: totalPages }));
+    }, [numberPage, totalPages, dispatch]);
 
-        step && fetchData();
-    }, [pagination, step, idCategory, searchValue]);
+    useEffect(() => {
+        if (step === 0 && pagination.start === 0) return;
+        let url = `https://ma-backend-api.mocintra.com/api/v1/products?limit=${step}&offset=${pagination.start}`;
+        if (idCategory) url = `${url}&categoryId=${idCategory}`;
+        if (searchValue.length > 0) url = `${url}&title=${searchValue}`;
+        setBaseUrl(url);
+    }, [idCategory, pagination, searchValue, step]);
+
+    useEffect(() => {
+        setIsLoader(true);
+        dispatch(getProductsThunk({ url: baseUrl }));
+    }, [baseUrl, dispatch]);
+
+    useEffect(() => {
+        dispatch(setTheme(defaultTheme));
+    }, [defaultTheme, dispatch]);
+
+    useEffect(() => {
+        setAllProducts(products.products || []);
+        setTotalProducts(products.total || 0);
+        setIsLoader(false);
+    }, [products]);
 
     useEffect(() => {
         allProducts.length > 0 && step && setNumberPage(pagination.end / step);
@@ -85,7 +99,7 @@ const App = () => {
             });
             setNumberPage(Math.ceil(totalProducts / step));
         }
-    }, [allProducts, pagination.end, step, totalProducts, searchValue, errorMessage, numberPage, totalPages]);
+    }, [allProducts, pagination.end, step, totalProducts]);
 
     const width = useResize().width;
     useEffect(() => {
@@ -164,55 +178,52 @@ const App = () => {
 
     return (
         <div className="body">
-            <PagesContext.Provider value={{ page: numberPage, maxPages: totalPages }}>
-                <Routes>
-                    <Route path={'/'} element={<LayoutComponent theme={theme} amountCart={amountCart} changeTheme={changeTheme} />}>
-                        <Route index element={<About theme={theme} />} />
-                        {errorMessage && <Route path={'products'} element={<Error theme={theme} message={errorMessage} />} />}
-                        {!errorMessage && (
-                            <Route
-                                path={'products'}
-                                element={
-                                    isLoader ? (
-                                        <div
-                                            className={clsx('loader', {
-                                                light_theme: theme === 'light',
-                                                dark_theme: theme === 'dark',
-                                            })}
-                                        >
-                                            <BallTriangle
-                                                height={100}
-                                                width={100}
-                                                radius={5}
-                                                color="#4fa94d"
-                                                ariaLabel="ball-triangle-loading"
-                                                wrapperStyle={{}}
-                                                wrapperClass=""
-                                                visible={true}
-                                            />
-                                        </div>
-                                    ) : (
-                                        <ProductList
-                                            theme={theme}
-                                            products={allProducts}
-                                            increasePage={increasePage}
-                                            decrementPage={decrementPage}
-                                            increaseCounter={increaseCounter}
-                                            decrementCounter={decrementCounter}
-                                            getProductsById={getProductsById}
-                                            getSortByName={getSortByName}
-                                            getSearchValue={getSearchValue}
-                                            nameCategory={nameCategory}
+            <Routes>
+                <Route path={'/'} element={<LayoutComponent amountCart={amountCart} changeTheme={changeTheme} />}>
+                    <Route index element={<About />} />
+                    {errorMessage && <Route path={'products'} element={<Error message={errorMessage} />} />}
+                    {!errorMessage && (
+                        <Route
+                            path={'products'}
+                            element={
+                                isLoader ? (
+                                    <div
+                                        className={clsx('loader', {
+                                            light_theme: theme === 'light',
+                                            dark_theme: theme === 'dark',
+                                        })}
+                                    >
+                                        <BallTriangle
+                                            height={100}
+                                            width={100}
+                                            radius={5}
+                                            color="#4fa94d"
+                                            ariaLabel="ball-triangle-loading"
+                                            wrapperStyle={{}}
+                                            wrapperClass=""
+                                            visible={true}
                                         />
-                                    )
-                                }
-                            />
-                        )}
-                        <Route path={'product/:id'} element={<ProductPageComponent theme={theme} />} />
-                    </Route>
-                    <Route path={'*'} element={<PageNotFound theme={theme} />} />
-                </Routes>
-            </PagesContext.Provider>
+                                    </div>
+                                ) : (
+                                    <ProductList
+                                        products={allProducts}
+                                        increasePage={increasePage}
+                                        decrementPage={decrementPage}
+                                        increaseCounter={increaseCounter}
+                                        decrementCounter={decrementCounter}
+                                        getProductsById={getProductsById}
+                                        getSortByName={getSortByName}
+                                        getSearchValue={getSearchValue}
+                                        nameCategory={nameCategory}
+                                    />
+                                )
+                            }
+                        />
+                    )}
+                    <Route path={'product/:id'} element={<ProductPageComponent />} />
+                </Route>
+                <Route path={'*'} element={<PageNotFound />} />
+            </Routes>
         </div>
     );
 };
