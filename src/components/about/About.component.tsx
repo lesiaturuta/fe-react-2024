@@ -1,8 +1,13 @@
+import { useSelector } from 'react-redux';
+
 import { clsx } from 'clsx';
+
+import { selectTheme } from '@/store/theme/selectors.ts';
 
 import styles from './about.module.css';
 
-const About = ({ theme }: { theme: string }) => {
+const About = () => {
+    const theme = useSelector(selectTheme);
     const name = 'Lesia';
     return (
         <main

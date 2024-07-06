@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { clsx } from 'clsx';
 
 import IconCart from '@/assets/icons/IconCart.component.tsx';
 import type Product from '@/interface/product.ts';
+import { selectTheme } from '@/store/theme/selectors.ts';
 
 import styles from './productCard.module.css';
 
@@ -12,13 +14,12 @@ const ProductCard = ({
     product,
     increaseCounter,
     decrementCounter,
-    theme,
 }: {
     product: Product;
     increaseCounter: () => void;
     decrementCounter: () => void;
-    theme: string;
 }) => {
+    const theme = useSelector(selectTheme);
     const [isCart, setIsCart] = useState(false);
 
     useEffect(() => {

@@ -1,26 +1,27 @@
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { clsx } from 'clsx';
 
 import search from '@/assets/icons/search.svg';
 import type { CategoryName } from '@/interface';
+import { selectTheme } from '@/store/theme/selectors.ts';
 
 import styles from './search.module.css';
 
 const Search = ({
-    theme,
     getProductsById,
     getSortByName,
     getSearchValue,
     nameCategory,
 }: {
-    theme: string;
     getProductsById: (name: CategoryName) => void;
     getSortByName: (name: string) => void;
     getSearchValue: (value: string) => void;
     nameCategory: string;
 }) => {
+    const theme = useSelector(selectTheme);
     const nameSelect: string[] = ['Price (High - Low)', 'Price (Low - High)', 'Newest', 'Oldest'];
 
     const [selectedSort, setSelectedSort] = useState<string>(nameSelect[0]);
