@@ -6,6 +6,7 @@ interface ButtonInterface {
     className?: string;
     widthIcon?: number;
     heightIcon?: number;
+    onClick?: () => void;
 }
 
 export default ButtonInterface;

@@ -10,9 +10,15 @@ const Button = ({
     className,
     widthIcon = 24,
     heightIcon = 24,
+    onClick,
 }: ButtonInterface) => (
-    <button className={`${styles.button} ${className}`} type="reset" style={{ background: backgroundColor, color: textColor }}>
-        {icon && <img className={styles.icon} width={widthIcon} height={heightIcon} src={icon} alt="Icon" />} {}
+    <button
+        className={`${styles.button} ${className}`}
+        type="reset"
+        style={{ background: backgroundColor, color: textColor }}
+        onClick={onClick}
+    >
+        {icon && <img className={styles.icon} width={widthIcon} height={heightIcon} src={icon} alt="Icon" />}
         {name}
     </button>
 );

@@ -13,3 +13,13 @@ export interface GetProductsParameters {
 export interface GetProductParameters {
     id: string;
 }
+
+export interface TokensResponse {
+    access_token: string;
+    refresh_token: string;
+}
+
+export interface AccessTokenResponse {
+    access_token: string;
+    refresh_token: string;
+}

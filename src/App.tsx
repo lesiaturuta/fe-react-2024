@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { BallTriangle } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { clsx } from 'clsx';
 
 import About from '@/components/about/About.component.tsx';
 import Error from '@/components/Error/Error.components.tsx';
 import LayoutComponent from '@/components/LayoutComponent/LayoutComponent.tsx';
+import Login from '@/components/login/Login.component.tsx';
 import { useResize } from '@/components/myHooks/use-resize';
 import PageNotFound from '@/components/pageNotFound/PageNotFound.components.tsx';
 import ProductList from '@/components/productList/ProductList.component.tsx';
@@ -20,6 +21,7 @@ import { selectProducts } from '@/store/productsList/selectors.ts';
 import { getProductsThunk } from '@/store/productsList/thunks.ts';
 import { selectTheme } from '@/store/theme/selectors.ts';
 import { setTheme } from '@/store/theme/theme.ts';
+import { verifyUser } from '@/utils/authUser.ts';
 
 import './App.css';
 
@@ -28,7 +30,7 @@ const App = () => {
     if (localStorage.getItem('theme')) {
         defaultTheme = localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
     }
-
+    const navigate = useNavigate();
     const theme = useSelector(selectTheme);
     const products = useSelector(selectProducts);
     const dispatch = useDispatch<AppDispatch>();
@@ -52,10 +54,22 @@ const App = () => {
     const [isLoader, setIsLoader] = useState<boolean>(false);
     const [errorMessage] = useState<string>('');
     const [baseUrl, setBaseUrl] = useState<string>('');
+    const [isAuthorized, setIsAuthorized] = useState(false); // Состояние для проверки авторизации
 
     const changeTheme = (newTheme: string) => {
         dispatch(setTheme(newTheme));
     };
+
+    useEffect(() => {
+        verifyUser()
+            .then(() => {
+                setIsAuthorized(true);
+            })
+            .catch(() => {
+                setIsAuthorized(false);
+                navigate('/login');
+            });
+    }, [navigate]);
 
     useEffect(() => {
         dispatch(setPaginationPage({ page: numberPage, maxPages: totalPages }));
@@ -179,10 +193,14 @@ const App = () => {
     return (
         <div className="body">
             <Routes>
-                <Route path={'/'} element={<LayoutComponent amountCart={amountCart} changeTheme={changeTheme} />}>
-                    <Route index element={<About />} />
-                    {errorMessage && <Route path={'products'} element={<Error message={errorMessage} />} />}
-                    {!errorMessage && (
+                <Route
+                    path={'/'}
+                    element={<LayoutComponent amountCart={amountCart} isAuthorized={isAuthorized} changeTheme={changeTheme} />}
+                >
+                    <Route index element={isAuthorized ? <About /> : <Login />} />
+                    {!isAuthorized && <Route path={'products'} element={<Login />} />}
+                    {isAuthorized && errorMessage && <Route path={'products'} element={<Error message={errorMessage} />} />}
+                    {isAuthorized && !errorMessage && (
                         <Route
                             path={'products'}
                             element={
@@ -221,6 +239,7 @@ const App = () => {
                         />
                     )}
                     <Route path={'product/:id'} element={<ProductPageComponent />} />
+                    <Route path={'/login'} element={<Login />} />
                 </Route>
                 <Route path={'*'} element={<PageNotFound />} />
             </Routes>
